@@ -11,6 +11,7 @@ Repository:
  -------------------------------------
  */
 
+// Include Dependencies 
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,6 +23,7 @@ Repository:
 #include <time.h>
 #include <ctype.h> 
 
+// Set up global variables
 int *available_ptr;  // number of available resources
 int *max_ptr;        // a m by n matrix representing the max resources
 int *allocation_ptr; // a m by n matrix representing the resources allocated to the current process
@@ -29,6 +31,7 @@ int *need_ptr;       // shows the remaining resources that the process needs
 int rows = -1; // the number of customers
 int cols = -1; // the number of resources
 
+// Thread structure
 typedef struct thread{ 
 
 	char tid[4]; //this is the id of the thread when it is read
@@ -60,7 +63,7 @@ int read_customers(char *fname){
         return count;
 }
 
-//THis function counts the number of resources
+// This function counts the number of resources
 int count_resources(char *fname){
         
         int num_resource = 0;
@@ -82,7 +85,8 @@ int count_resources(char *fname){
 }
 
 
-//The The thread runner
+
+// The function is thread runner
 void *execute_thread(){
         char ord[100];
         int resources[cols];
@@ -145,7 +149,7 @@ void *execute_thread(){
         
 }
 
-//Function to release resource
+// Release resources function
 int resource_release (int args[]){
 int i;
     int cust_num = args[0];
@@ -175,7 +179,7 @@ int i;
     return 0;
 }
 
-//Function to request resources
+// Request Resources function
 int resource_request (int args[]){
     int customer_num = args[0];
     int req[cols];  
@@ -224,7 +228,7 @@ int resource_request (int args[]){
     }
 }
 
-//the saftey algorithm
+// Safety Algorithm
 bool safety(int *available, int *allocated, int *need){
     int work[cols];
     for (int i = 0; i < cols; i++) {
@@ -239,7 +243,7 @@ bool safety(int *available, int *allocated, int *need){
     }
 
     int safe_seq[rows];
-//begin checking
+// begin checking
     int ind = 0;
     while (ind < rows){
         bool found = false;
@@ -270,7 +274,7 @@ bool safety(int *available, int *allocated, int *need){
         }
 }
 
-//main method
+// main method
 int main(int argc, char *argv[]){
         //we begin by getting the number of resources and customers on file. This helps to fill the matrix
         cols = count_resources("sample4_in.txt"); 
@@ -296,17 +300,17 @@ int main(int argc, char *argv[]){
             }
         }
 
-        //we now need to set the matricies
+        // we now need to set the matricies
         printf("Number of Customers: %d\n", rows);
-       
-        printf("Cuurently Available resources: ");
+	// unavailable 
+        printf("Curently Available resources: ");
         for (int i = 1; i < cols; i++){
                 printf("%s ", argv[i]);
         }
         printf("%s\n", argv[cols]);
 
 
-        
+        // maximum resources
         printf("Maximum resources from file:\n");
         //these lines will open and set the MAX matrix
         FILE *file = fopen("sample4_in.txt", "r");
