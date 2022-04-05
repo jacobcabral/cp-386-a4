@@ -22,8 +22,8 @@
   * Maximum demand of each customer
   * Amount currently allocated to each customer
   * Remaining need of each customer
-  * Safety algorithm to grant a request, if it leaves the system in a safe state, otherwise destroy it
-  * Allows the user to interactively enter a request for resources or to output the values of the different data structures (available, maximum, allocation, and need) used with the banker's algorithm and executes customers as threads in a safe sequence.
+* Safety algorithm to grant a request, if it leaves the system in a safe state, otherwise destroy it
+* Allows the user to interactively enter a request for resources or to output the values of the different data structures (available, maximum, allocation, and need) used with the banker's algorithm and executes customers as threads in a safe sequence.
 
 #### Expected output for Q1:
 ![image](https://user-images.githubusercontent.com/61894684/161637617-d00dc682-9798-4eca-96ea-f9b226e0820d.png)
